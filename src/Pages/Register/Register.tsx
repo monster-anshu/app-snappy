@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Container } from './RegisterStyle';
-import Logo from 'Assets/logo.svg';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { registerRoute } from 'Utils/APIRoutes';
@@ -82,7 +81,7 @@ const Register = () => {
     <Container>
       <form onSubmit={handleSubmit}>
         <div className="brand">
-          <img src={Logo} alt={'Logo'} />
+          <img src={'/assets/logo.svg'} alt={'Logo'} />
           <h1>snappy</h1>
         </div>
         <input

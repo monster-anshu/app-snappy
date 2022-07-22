@@ -1,14 +1,13 @@
 import React from 'react';
 import { UserType } from 'Types';
 import { Container } from './Welcome.style';
-import Robot from 'Assets/robot.gif';
 interface Proptypes {
   user: UserType;
 }
 const Welcome: React.FC<Proptypes> = ({ user }) => {
   return (
     <Container>
-      <img src={Robot} alt={'Robot'} />
+      <img src={'/assets/robot.gif'} alt={'Robot'} />
       <h1>
         Welcome , <span>{user.username}</span>
       </h1>

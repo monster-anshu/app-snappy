@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { UserType } from 'Types';
 import { Container } from './Contacts.style';
-import Logo from 'Assets/logo.svg';
 import { Contact, CurrentUser } from 'Components';
 import { Context } from 'Context';
 interface Proptypes {
@@ -16,7 +15,7 @@ const Contacts: React.FC<Proptypes> = ({ users, selected, onSelect }) => {
   return (
     <Container>
       <div className={'brand'}>
-        <img src={Logo} alt={'Logo'} />
+        <img src={'/assets/logo.svg'} alt={'Logo'} />
         <h3 data-count={unreadchat.length}>snappy</h3>
       </div>
       <div className={'contacts'}>
