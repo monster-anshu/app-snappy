@@ -19,6 +19,7 @@ const Sender: React.FC<Proptypes> = ({ onSubmit }) => {
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     message && onSubmit?.(message);
+    setMessage('');
   };
 
   const handleEmojiEnter: IEmojiPickerProps['onEmojiClick'] = (

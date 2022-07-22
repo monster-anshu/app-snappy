@@ -17,9 +17,8 @@ const ChatContainer = () => {
   };
   const [users, setUsers] = useState<UserType[]>([]);
 
-  const getUsers = async (page: number) => {
-    const res = await API?.get(getAllusers(page));
-    setUsers(res?.data);
+  const getUsers = (page: number) => {
+    API?.get(getAllusers(page)).then((res) => setUsers(res.data));
   };
 
   useEffect(() => {
