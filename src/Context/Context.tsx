@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useState } from 'react';
 import { createContext } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -17,11 +17,10 @@ export const ContextProvider: React.FC<{ children: React.ReactNode }> = (
   const [user, setUser] = useState<UserType | null>(null);
   const [loading, setLoading] = useState(true);
   const [unreadchat, setUnreadchat] = useState<MessageType[]>([]);
+  const [socket, setSocket] = useState<Socket | null>(null);
 
   const host = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
-
-  const socket = useRef<null | Socket>(null);
 
   const API = useMemo(
     () =>
@@ -31,7 +30,8 @@ export const ContextProvider: React.FC<{ children: React.ReactNode }> = (
         },
         baseURL: `https://${host}`,
       }),
-    [token, host],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [token],
   );
 
   const userSetter = (user: UserType) => setUser(user);
@@ -41,7 +41,7 @@ export const ContextProvider: React.FC<{ children: React.ReactNode }> = (
     setToken(null);
     setUser(null);
     localStorage.removeItem('token');
-    socket.current?.disconnect();
+    socket?.disconnect();
     navigate('/login');
   };
 
@@ -51,7 +51,7 @@ export const ContextProvider: React.FC<{ children: React.ReactNode }> = (
         const IO = io(`ws://${host}`);
         const id = res.data._id;
         IO.emit('online', { user_id: id });
-        socket.current = IO;
+        setSocket(IO);
         setUser(res.data);
         if (!res.data.avatarImage) navigate('/avatar');
       })
@@ -69,13 +69,15 @@ export const ContextProvider: React.FC<{ children: React.ReactNode }> = (
     );
 
   useEffect(() => {
-    if (!socket.current) return;
-    socket.current?.on('recieve_chat', (res) => {
+    if (!socket) return;
+    socket.on('recieve_chat', (res) => {
       const _id = (Math.random() * 10000).toString();
+      console.log(res);
+
       const revicedMessage: MessageType = { ...res, _id };
       add_unread_chat(revicedMessage);
     });
-  }, [user?._id]);
+  }, [socket]);
 
   useEffect(() => {
     API.get('/')
