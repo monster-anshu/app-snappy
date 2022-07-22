@@ -24,7 +24,7 @@ export interface ContextType {
   API: AxiosInstance | null;
   userSetter?: (user: UserType) => void;
   tokenSetter?: (token: string) => void;
-  get_user?: () => Promise<void>;
+  get_user?: () => void;
   logout?: () => void;
   unreadchat: MessageType[];
   remove_unread_chat?: (user_id: string) => void;

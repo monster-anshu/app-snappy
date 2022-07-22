@@ -27,7 +27,7 @@ export const ContextProvider: React.FC<{ children: React.ReactNode }> = (
     () =>
       axios.create({
         headers: {
-          Authorization: token ?? '',
+          Authorization: token ?? 'lol',
         },
         baseURL: `https://${host}`,
       }),
@@ -45,15 +45,19 @@ export const ContextProvider: React.FC<{ children: React.ReactNode }> = (
     navigate('/login');
   };
 
-  const get_user = async () => {
-    const res = await API.get(get_me);
-    const IO = io(`ws://${host}`);
-    const id = res.data._id;
-    IO.emit('online', { user_id: id });
-    socket.current = IO;
-    if (res.status === 401) logout();
-    setUser(res.data);
-    if (!res.data.avatarImage) navigate('/avatar');
+  const get_user = () => {
+    API.get(get_me)
+      .then((res) => {
+        const IO = io(`ws://${host}`);
+        const id = res.data._id;
+        IO.emit('online', { user_id: id });
+        socket.current = IO;
+        setUser(res.data);
+        if (!res.data.avatarImage) navigate('/avatar');
+      })
+      .catch((err) => {
+        if (err.response.status === 401) return logout();
+      });
   };
 
   const add_unread_chat = (message: MessageType) =>
@@ -74,8 +78,10 @@ export const ContextProvider: React.FC<{ children: React.ReactNode }> = (
   }, [user?._id]);
 
   useEffect(() => {
-    API.get('/').then(() => setLoading(false));
-  }, [API]);
+    API.get('/')
+      .then((res) => setLoading(false))
+      .catch((err) => console.log(err));
+  }, [API, host]);
 
   const globalValues = {
     token,
