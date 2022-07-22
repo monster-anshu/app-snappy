@@ -29,7 +29,7 @@ export const ContextProvider: React.FC<{ children: React.ReactNode }> = (
         headers: {
           Authorization: token ?? '',
         },
-        baseURL: `http://${host}`,
+        baseURL: `https://${host}`,
       }),
     [token, host],
   );
