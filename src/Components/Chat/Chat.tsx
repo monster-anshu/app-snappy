@@ -34,7 +34,7 @@ const Chat: React.FC<Proptypes> = ({ user }) => {
       (message) => message.sender === user._id,
     );
     if (!my_unread_message.length) return;
-    console.log(my_unread_message);
+    setMessages((messages) => messages.concat(my_unread_message));
     remove_unread_chat?.(user._id);
   }, [unreadchat, user, remove_unread_chat]);
 
