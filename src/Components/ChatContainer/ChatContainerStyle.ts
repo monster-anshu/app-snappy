@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const Contaienr = styled.div`
-  height: 95%;
-  width: 95%;
+  height: 85vh;
+  width: 85vw;
   background-color: #00000076;
   display: grid;
-  grid-template-columns: 25% 75%;
+  grid-template-columns: 20% 80%;
   grid-template-rows: 100%;
   @media screen and (max-width: 1000px) {
     grid-template-columns: 35% 65%;
