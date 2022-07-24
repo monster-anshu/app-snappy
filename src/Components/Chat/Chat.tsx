@@ -11,10 +11,13 @@ import defaultUser from 'Assets/user.svg';
 import { Sender, Message } from 'Components';
 import { send_message, get_messages } from 'Utils/APIRoutes';
 import { Context } from 'Context';
+import { useWindowDimensions } from 'Hooks';
+
 interface Proptypes {
   user: UserType;
+  onBack?: () => void;
 }
-const Chat: React.FC<Proptypes> = ({ user }) => {
+const Chat: React.FC<Proptypes> = ({ user, onBack }) => {
   const {
     API,
     user: current_user,
@@ -73,6 +76,11 @@ const Chat: React.FC<Proptypes> = ({ user }) => {
   return (
     <Container>
       <div className={'chat-header'}>
+        <div>
+          {useWindowDimensions().width < 560 && (
+            <i className="bx bx-menu" onClick={onBack}></i>
+          )}
+        </div>
         <div className={'chat-user'}>
           <img
             src={

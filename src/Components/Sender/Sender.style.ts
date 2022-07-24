@@ -1,22 +1,25 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: grid;
-  grid-template-columns: 5% 95%;
+  position: relative;
   align-items: center;
   background-color: #080420;
   padding: 0.2rem;
   padding: 0.3rem;
+  display: flex;
+  align-items: center;
   .button-container {
     display: flex;
     align-items: center;
     color: #ffffff;
     gap: 1rem;
     position: relative;
+    position: absolute;
     img {
-      height: 1rem;
-      width: 1rem;
+      height: 2rem;
+      width: 2rem;
       cursor: pointer;
+      padding: 0.2rem;
     }
     .emoji-picker-react {
       top: -350px;
@@ -53,11 +56,10 @@ export const Container = styled.div`
     align-items: center;
     background-color: #ffffff34;
     input {
-      width: 90%;
-      height: 60%;
+      height: 2rem;
       background-color: transparent;
       border: none;
-      padding-left: 1rem;
+      padding: 0 2.1rem;
       font-size: 1.2rem;
       resize: none;
       color: var(--white);
@@ -69,6 +71,8 @@ export const Container = styled.div`
       }
     }
     button {
+      right: 0.3rem;
+      position: absolute;
       padding: 0.3rem 2rem;
       border-radius: 2rem;
       display: flex;
@@ -77,9 +81,11 @@ export const Container = styled.div`
       background-color: #9186f3;
       border: none;
       cursor: pointer;
+      height: 2rem;
+      width: 2;
       img {
-        height: 1rem;
-        width: 1rem;
+        height: 100%;
+        width: 100%;
       }
     }
   }

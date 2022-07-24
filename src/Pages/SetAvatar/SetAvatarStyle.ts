@@ -5,11 +5,13 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  align-content: center;
   gap: 3rem;
   background-color: #131324;
   height: 100vh;
   width: 100vw;
   .title {
+    text-align: center;
     h1 {
       color: var(--white);
     }
@@ -17,6 +19,8 @@ export const Container = styled.div`
   .avatars {
     display: flex;
     gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   button {
     background-color: #997af0;

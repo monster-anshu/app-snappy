@@ -6,16 +6,21 @@ export const Container = styled.div`
   grid-template-rows: 10% 80% 10%;
   .chat-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 1rem;
     align-items: center;
     padding: 0 2rem;
+    i {
+      color: #ffffff;
+      font-size: 2rem;
+    }
     .chat-user {
       gap: 1rem;
       display: flex;
       justify-content: center;
       align-items: center;
       img {
-        height: 3rem;
+        height: 2.5rem;
       }
       h3 {
         color: var(--white);

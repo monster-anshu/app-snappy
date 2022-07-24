@@ -5,6 +5,7 @@ import { getAllusers } from 'Utils/APIRoutes';
 import { Context } from 'Context';
 import { UserType } from 'Types';
 import { Welcome, Chat } from 'Components';
+import { useWindowDimensions } from 'Hooks';
 const ChatContainer = () => {
   const { API, user } = useContext(Context);
 
@@ -17,6 +18,7 @@ const ChatContainer = () => {
   };
   const [users, setUsers] = useState<UserType[]>([]);
 
+  const small = useWindowDimensions().width < 561;
   const getUsers = (page: number) => {
     API?.get(getAllusers(page)).then((res) => setUsers(res.data));
   };
@@ -26,12 +28,27 @@ const ChatContainer = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    user && (
+    user &&
+    (small ? (
+      <>
+        <Contaienr>
+          {selected ? (
+            <Chat user={selected} onBack={() => setSelected(null)} />
+          ) : (
+            <Contacts
+              users={users}
+              selected={selected}
+              onSelect={handleSelect}
+            />
+          )}
+        </Contaienr>
+      </>
+    ) : (
       <Contaienr>
         <Contacts users={users} selected={selected} onSelect={handleSelect} />
         {selected ? <Chat user={selected} /> : <Welcome user={user} />}
       </Contaienr>
-    )
+    ))
   );
 };
 
