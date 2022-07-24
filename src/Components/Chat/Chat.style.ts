@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   padding-top: 1rem;
-  border: 2px solid white;
   display: grid;
   grid-template-rows: 10% 80% 10%;
   .chat-header {
