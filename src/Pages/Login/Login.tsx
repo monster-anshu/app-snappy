@@ -95,9 +95,9 @@ const Login = () => {
         <button type={'submit'} disabled={loading}>
           Log in
         </button>
-        <span>
+        <p>
           Don't have an account ? <Link to={'/register'}>Register</Link>
-        </span>
+        </p>
       </form>
     </Container>
   );

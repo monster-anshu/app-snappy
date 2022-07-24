@@ -115,9 +115,9 @@ const Register = () => {
         <button type={'submit'} disabled={loading}>
           Create Account
         </button>
-        <span>
+        <p>
           Already have an account ? <Link to={'/login'}>Login</Link>
-        </span>
+        </p>
       </form>
     </Container>
   );

@@ -29,6 +29,7 @@ export const Container = styled.div`
     background-color: #00000076;
     border-radius: 2rem;
     padding: 3rem 5rem;
+    margin: 1rem;
     @media screen and (max-width: 420px) {
       padding: 1.5rem 2.5rem;
     }
@@ -60,9 +61,11 @@ export const Container = styled.div`
         background-color: #4e0eff;
       }
     }
-    span {
+    p {
+      text-align: center;
       color: var(--white);
       text-transform: uppercase;
+      line-height: 1.5rem;
       a {
         color: #4e0eff;
         text-decoration: none;
