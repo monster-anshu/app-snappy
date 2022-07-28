@@ -28,6 +28,7 @@ export const ContextProvider: React.FC<{ children: React.ReactNode }> = (
         headers: {
           Authorization: token ?? 'lol',
         },
+        baseURL: `https://${host}`,
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [token],
