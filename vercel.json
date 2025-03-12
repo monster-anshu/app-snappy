@@ -3,6 +3,6 @@
     {
       "source": "/api/:path*",
       "destination": "https://api.himanshu-gunwant.com/api/:path*"
-    },
+    }
   ]
 }
