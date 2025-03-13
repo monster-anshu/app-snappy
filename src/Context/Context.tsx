@@ -19,7 +19,8 @@ export const ContextProvider: React.FC<{ children: React.ReactNode }> = (
   const [unreadchat, setUnreadchat] = useState<MessageType[]>([]);
   const [socket, setSocket] = useState<Socket | null>(null);
 
-  const host = process.env.REACT_APP_API_URL;
+  const apiURL = process.env.REACT_APP_API_URL;
+  const socketURL = process.env.REACT_APP_SOCKET_URL;
   const navigate = useNavigate();
 
   const API = useMemo(
@@ -28,7 +29,7 @@ export const ContextProvider: React.FC<{ children: React.ReactNode }> = (
         headers: {
           Authorization: token ?? 'lol',
         },
-        baseURL: `https://${host}`,
+        baseURL: apiURL,
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [token],
@@ -48,7 +49,7 @@ export const ContextProvider: React.FC<{ children: React.ReactNode }> = (
   const get_user = () => {
     API.get(get_me)
       .then((res) => {
-        const IO = io(`ws://${host}`);
+        const IO = io(socketURL);
         const id = res.data._id;
         IO.emit('online', { user_id: id });
         setSocket(IO);
@@ -80,10 +81,10 @@ export const ContextProvider: React.FC<{ children: React.ReactNode }> = (
   }, [socket]);
 
   useEffect(() => {
-    API.get('/')
+    API.get('/api/health')
       .then((res) => setLoading(false))
       .catch((err) => console.log(err));
-  }, [API, host]);
+  }, [API, apiURL]);
 
   const globalValues = {
     token,
