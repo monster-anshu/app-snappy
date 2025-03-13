@@ -49,7 +49,8 @@ export const ContextProvider: React.FC<{ children: React.ReactNode }> = (
   const get_user = () => {
     API.get(get_me)
       .then((res) => {
-        const IO = io(socketURL);
+        const socketPath = process.env.REACT_APP_SOCKET_PATH;
+        const IO = io(socketURL,{ path : socketPath});
         const id = res.data._id;
         IO.emit('online', { user_id: id });
         setSocket(IO);
